@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latent Diffusion-Based 3D Molecular Recovery from Vibrational Spectra</title>
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+    <!-- FontAwesome (GitHub 图标) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<!-- FontAwesome (支持 GitHub、Adobe 图标) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+<!-- Academicons (arXiv 图标) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons/css/academicons.min.css">
+
+    <style>
+        body {
+            font-family: 'Google Sans', Arial, sans-serif;
+            text-align: center;
+            background-color: white;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+        }
+        h1 {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .authors {
+            font-size: 18px;
+            color: #007bff;
+        }
+        .affiliations {
+            font-size: 16px;
+            color: #555;
+        }
+        .journal {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .button-group {
+            display: flex;
+            justify-content: center;  /* 让按钮居中 */
+            gap: 10px;  /* 按钮之间的间距 */
+            margin-top: 20px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            background: black;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+
+        .button i {
+            margin-right: 8px;  /* 图标和文字的间距 */
+            font-size: 18px;
+        }
+
+        .button:hover {
+            background: #333;
+        }
+        #toc-image {
+            margin: 30px auto;
+            max-width: 100%;
+            width: 600px; /* 可调整 */
+        }
+        #abstract {
+            max-width: 700px;
+            margin: 30px auto;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: justify;
+        }
+        #abstract h2 {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        #abstract p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #474747;
+        }
+        #abstract strong {
+            font-weight: bold;
+            color: #000;
+        }
+        #Model {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+            text-align: justify;
+        }
+        #model h2 {
+            text-align: left;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        #model-image {
+            display: block;
+            margin: 30px auto;
+            max-width: 100%;
+            width: 900px; /* 可调整 */
+        }
+        #Experiment {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+            text-align: justify;
+        }
+        #Experiment h2 {
+            text-align: left;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        #image-top1 {
+            display: block;
+            margin: 30px auto;
+            max-width: 70%;
+            width: 550px; /* 可调整 */
+        }
+        #image-tsne {
+            display: block;
+            margin: 30px auto;
+            max-width: 100%;
+            width: 550px; /* 可调整 */
+        }
+        #image-exp {
+            display: block;
+            margin: 30px auto;
+            max-width: 100%;
+            width: 1000px; /* 可调整 */
+        }
+        #bibtex-container {
+        max-width: 900px;
+        margin: 50px auto;
+        text-align: left;
+        background: #f9f9f9;
+        padding: 20px;
+        border-radius: 10px;
+        font-family: monospace;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #bibtex-scroll {
+            max-width: 100%;
+            overflow-x: auto;
+            background: #f9f9f9;
+            padding: 10px;
+            border-radius: 2px;
+            /* box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1); */
+        }
+
+        pre {
+            white-space: pre;
+            margin: 0;
+            padding: 0;  /* 移除默认内边距，确保文本左对齐 */
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Latent Diffusion-Based 3D Molecular Recovery from Vibrational Spectra</h1>
+        
+        <p class="authors">
+            <a >Wenjin Wu</a><sup>1,2</sup>, 
+            <a href="https://www.birmingham.ac.uk/staff/profiles/computer-science/academic-staff/leonardis-ales">Aleš Leonardis</a><sup>1</sup>,
+            <a href="https://jianbojiao.com/">Jianbo Jiao</a><sup>1</sup>, 
+            <a >Linjiang Chen</a><sup>1,2</sup>
+        </p>
+
+        <p class="affiliations">
+            <sup>1</sup><a href="https://mix.jianbojiao.com">MIx Group</a>, University of Birmingham, 
+            <sup>2</sup>University of Science and
+            Technology of China
+        </p>
+
+        <!-- <p class="journal">
+            <a href="https://pubs.acs.org/doi/10.1021/acs.jpca.4c05665">The Journal of Physical Chemistry A</a>
+        </p> -->
+        <div class="button-group">
+            <!-- GitHub Code 按钮 -->
+            <a class="button" href="" target="_blank">
+                <i class="fab fa-github"></i> Code
+            </a>
+        
+            <!-- 论文 Paper 按钮 -->
+            <a class="button" href="" target="_blank">
+                <i class="fa-solid fa-file-pdf"></i> Paper
+            </a>
+        </div>
+    </div>
+    <!-- <img id="toc" src="./model_TOC3.jpg"> -->
+    <div id = "toc" class="container">
+        <img id="toc-image" src="fig/toc_2.pdf" alt="Table of Contents">
+    </div>
+    <section id="abstract">
+        <h2>Abstract</h2>
+        <p>
+            Infrared (IR) spectroscopy, a type of vibrational spectroscopy, is widely used for molecular structure determination and provides critical structural information for chemists. 
+            However, existing approaches for recovering molecular structures from IR spectra typically rely on one-dimensional SMILES strings or two-dimensional molecular graphs, which fail to capture the intricate relationship between spectral features and three-dimensional molecular geometry.
+            Recent advances in diffusion models have greatly enhanced the ability to generate molecular structures in 3D space. 
+            Yet, no existing model has explored the distribution of 3D molecular geometries corresponding to a single IR spectrum.
+        </p>
+        <p>
+            In this work, we introduce <b>IR-GeoDiff</b>, a latent diffusion model that recovers 3D molecular geometries from IR spectra by integrating spectral information into both node and edge representations of molecular structures.
+            We evaluate IR-GeoDiff from both spectral and structural perspective, demonstrating its ability to recover the molecular distribution corresponding to a given IR spectrum. 
+            Furthermore, an attention-based analysis reveals that the model's interpretation of IR spectra aligns with quantum mechanical principles of molecular vibrations.
+        </p>
+        
+    </section>
+
+    <section id="Model">
+        <h2>Method</h2>
+        <img id="model-image" src="fig/model_no_fg.pdf" alt="Model">
+        <!-- </p> We introduce a patch-based self-attention spectrum embedding layer to increase the sampling resolution of spectral data while ensuring that no critical information is lost during the sampling process. 
+        Specifically, we sample 3,200 points from each infrared (IR) spectrum within the range of 400–3,982 cm<sup>-1</sup>. 
+        Each spectrum is then divided into patches, which are processed through a self-attention mechanism. This approach improves computational efficiency and allows the model to capture spectral dependencies.
+         -->
+
+        <!-- </p> Additionally, we introduce a data augmentation method for spectral data, called Adaptive Noise.  -->
+        <!-- This technique selectively applies vertical noise to regions containing absorption peaks,  -->
+        <!-- ensuring that the introduced noise does not alter the intrinsic spectral information and encourages the model to focus on peak positions more. -->
+        
+    </section>
+<!-- 
+    <section id="Experiment">
+        <h2>Experiments</h2>
+        <img id="image-top1" src="fig/top1_acc.png" alt="Experiment">
+    </p> We evaluate our model on two simulated datasets, QM9S and the IBM dataset, as well as one real experimental dataset, the NIST dataset. Our method achieves superior performance compared to the current state-of-the-art (SOTA) approaches across all three datasets. These results demonstrate the effectiveness and generalizability of our method in accurately predicting molecular structures from IR spectra. 
+    Moreover, the consistent performance improvements across both simulated and real-world datasets highlight the robustness of our approach.
+        <img id="image-tsne" src="fig/exp_vs_sim.png" alt="Experiment">
+    </p>Although there are significant differences between computed spectra and experimental spectra that cannot be ignored, our method achieves comparable performance across both datasets. 
+    The t-SNE visualization further illustrates that the Transformer encoder effectively reduces the discrepancy between computed and experimental IR spectra in the latent space during fine-tuning.
+    </p>Below are example outputs from our method, generating molecules based on the input IR spectra. It is worth noting that the same molecule may correspond to different SMILES strings due to the non-unique nature of SMILES representations.
+        <img id="image-exp" src="fig/examples.png"> 
+    </section> -->
+    
+    <!-- <div id="bibtex-container">
+    <h2>BibTeX</h2>
+    <div id="bibtex-scroll">
+    <pre>
+@article{wu2025transformer,
+ title={Transformer-Based Models for Predicting Molecular Structures from Infrared Spectra Using Patch-Based Self-Attention},
+ author={Wu, Wenjin and Leonardis, Aleš and Jiao, Jianbo and Jiang, Jun and Chen, Linjiang},
+ journal={The Journal of Physical Chemistry A},
+ volume = {129},
+ number = {8},
+ pages = {2077-2085},
+ year={2025},
+ doi = {10.1021/acs.jpca.4c05665},
+ publisher={ACS Publications}
+}</pre>
+        </div>
+    </div> -->
+</body>
+</html>
