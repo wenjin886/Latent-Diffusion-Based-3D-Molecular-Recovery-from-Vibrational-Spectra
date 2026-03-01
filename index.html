@@ -21,14 +21,26 @@
             margin: 0;
             padding: 20px;
         }
-        .container {
-            max-width: 1000px;
-            margin: auto;
-        }
         h1 {
             font-size: 32px;
             font-weight: bold;
             margin-bottom: 10px;
+        }
+
+        .hero-section {
+            position: relative;
+            text-align: center;
+            padding: 50px;
+            color: black;
+
+            background-image: url("fig/title_background.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .container {
+            max-width: 1000px;
+            margin: auto;
         }
         .authors {
             font-size: 18px;
@@ -49,7 +61,6 @@
             gap: 10px;  /* 按钮之间的间距 */
             margin-top: 20px;
         }
-
         .button {
             display: inline-flex;
             align-items: center;
@@ -61,12 +72,10 @@
             font-size: 16px;
             transition: background 0.3s;
         }
-
         .button i {
             margin-right: 8px;  /* 图标和文字的间距 */
             font-size: 18px;
         }
-
         .button:hover {
             background: #333;
         }
@@ -75,7 +84,6 @@
             max-width: 100%;
             width: 600px; /* 可调整 */
         }
-       
         .media-row {
             display: flex;
             justify-content: center;   /* 居中 */
@@ -115,20 +123,14 @@
             font-weight: bold;
             color: #000;
         }
-        #Model {
+        .content-section {
             max-width: 850px;
-            margin: 30px auto;
+            margin: 20px auto;
             padding: 20px;
             background: white;
             border-radius: 10px;
             /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
-            text-align: justify;
-        }
-        #model h2 {
             text-align: left;
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 20px;
         }
         #model-image {
             display: block;
@@ -136,39 +138,7 @@
             max-width: 100%;
             width: 900px; /* 可调整 */
         }
-        #Experiment {
-            max-width: 1000px;
-            margin: 30px auto;
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
-            text-align: justify;
-        }
-        #Experiment h2 {
-            text-align: left;
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-        #image-top1 {
-            display: block;
-            margin: 30px auto;
-            max-width: 70%;
-            width: 550px; /* 可调整 */
-        }
-        #image-tsne {
-            display: block;
-            margin: 30px auto;
-            max-width: 100%;
-            width: 550px; /* 可调整 */
-        }
-        #image-exp {
-            display: block;
-            margin: 30px auto;
-            max-width: 100%;
-            width: 1000px; /* 可调整 */
-        }
+        
         #bibtex-container {
         max-width: 900px;
         margin: 50px auto;
@@ -195,12 +165,20 @@
             padding: 0;  /* 移除默认内边距，确保文本左对齐 */
         }
 
+        li {
+            margin-bottom: 12px;
+        }
+
+        h2 {
+            text-align: left;
+        }
+
 
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <div class="hero-section">
         <h1>Latent Diffusion-Based 3D Molecular Recovery<h1>
         <h1>from Vibrational Spectra</h1>
         
@@ -261,31 +239,40 @@
         
     </section>
 
-    <section id="Model">
-        <h2>Method</h2>
-        <img id="model-image" src="fig/model_no_fg.png" alt="Model">
-        <!-- </p> We introduce a patch-based self-attention spectrum embedding layer to increase the sampling resolution of spectral data while ensuring that no critical information is lost during the sampling process. 
-        Specifically, we sample 3,200 points from each infrared (IR) spectrum within the range of 400–3,982 cm<sup>-1</sup>. 
-        Each spectrum is then divided into patches, which are processed through a self-attention mechanism. This approach improves computational efficiency and allows the model to capture spectral dependencies.
-         -->
+    <section id="Contribution", class="content-section">
+        <h2>Contributions</h2>
+        <ul>
+            <li>We introduce a <b>novel task</b> of <u>recovering the distribution of 3D molecular geometries from infrared spectroscopy</u>. This formulation bridges molecular structure generation and spectroscopic analysis, and highlights the intrinsic link between vibrational spectral patterns and 3D molecular geometries.</li>
+            
+            <li>To the best of our knowledge, the proposed <b>IR-GeoDiff</b> is the first model to directly recover 3D molecular geometries from 1D infrared spectra, introducing a new paradigm for the automatic interpretation of IR spectra by leveraging 3D diffusion models.</li>
+            
+            <li>We propose a comprehensive set of <b>evaluation metrics</b> that assess whether the recovered molecular structures are consistent with the distribution encoded in the input infrared spectra, from <u>both structural and spectral perspectives</u>. </li>
+            
+            <li>We further investigate <b>how the proposed model works</b>, and find that the model is able to focus on spectral regions associated with characteristic functional groups. This behaviour qualitatively resembles how chemists interpret IR spectra, providing preliminary insights into the model’s interpretability.</li>
+        </ul>
+    </section>
 
-        <!-- </p> Additionally, we introduce a data augmentation method for spectral data, called Adaptive Noise.  -->
-        <!-- This technique selectively applies vertical noise to regions containing absorption peaks,  -->
-        <!-- ensuring that the introduced noise does not alter the intrinsic spectral information and encourages the model to focus on peak positions more. -->
+    <section id="Model", class="content-section">
+        <h2>IR-GeoDiff</h2>
+        <img id="model-image" src="fig/model_no_fg.png" alt="Model">
+    </section>
+
+    <section id="Experiment", class="content-section">
+        <h2>Examples</h2>
+        test
         
     </section>
-<!-- 
-    <section id="Experiment">
-        <h2>Experiments</h2>
-        <img id="image-top1" src="fig/top1_acc.png" alt="Experiment">
-    </p> We evaluate our model on two simulated datasets, QM9S and the IBM dataset, as well as one real experimental dataset, the NIST dataset. Our method achieves superior performance compared to the current state-of-the-art (SOTA) approaches across all three datasets. These results demonstrate the effectiveness and generalizability of our method in accurately predicting molecular structures from IR spectra. 
-    Moreover, the consistent performance improvements across both simulated and real-world datasets highlight the robustness of our approach.
-        <img id="image-tsne" src="fig/exp_vs_sim.png" alt="Experiment">
-    </p>Although there are significant differences between computed spectra and experimental spectra that cannot be ignored, our method achieves comparable performance across both datasets. 
-    The t-SNE visualization further illustrates that the Transformer encoder effectively reduces the discrepancy between computed and experimental IR spectra in the latent space during fine-tuning.
-    </p>Below are example outputs from our method, generating molecules based on the input IR spectra. It is worth noting that the same molecule may correspond to different SMILES strings due to the non-unique nature of SMILES representations.
-        <img id="image-exp" src="fig/examples.png"> 
-    </section> -->
+
+    <section id="Cross-attention", class="content-section">
+        <h2>Cross-Attention Visualisation</h2>
+        test
+    </section>
+
+    <section id="Exceptions", class="content-section">
+        <h2>Exceptions</h2>
+        test
+
+    </section>
     
     <!-- <div id="bibtex-container">
     <h2>BibTeX</h2>
