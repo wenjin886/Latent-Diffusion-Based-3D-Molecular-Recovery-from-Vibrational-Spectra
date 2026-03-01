@@ -75,6 +75,22 @@
             max-width: 100%;
             width: 600px; /* 可调整 */
         }
+       
+        .media-row {
+            display: flex;
+            justify-content: center;   /* 居中 */
+            align-items: center;       /* 垂直对齐 */
+            gap: 20px;                 /* 两个元素之间的间距 */
+            margin-top: 5px;
+        }
+        #toc-video {
+            width: 200px;      /* 控制大小 */
+            max-width: 100%;
+        } 
+        #toc-image-mol {
+            width: 500px;      /* 控制大小 */
+            max-width: 100%;
+        }
         #abstract {
             max-width: 700px;
             margin: 30px auto;
@@ -218,8 +234,17 @@
     </div>
     <!-- <img id="toc" src="./model_TOC3.jpg"> -->
     <div id = "toc" class="container">
-        <img id="toc-image" src="fig/toc_2.png" alt="Table of Contents">
-    </div>
+        <img id="toc-image" src="fig/toc.png" alt="Table of Contents">
+        <div class="media-row">
+        <video id="toc-video" controls autoplay loop muted>
+            <source src="fig/toc.mov" type="video/mp4">
+        </video>
+
+        <img id="toc-image-mol" 
+            src="fig/toc_recovered_mol.png" 
+            alt="Recovered Molecule">
+        </div>
+    </div>   
     <section id="abstract">
         <h2>Abstract</h2>
         <p>
