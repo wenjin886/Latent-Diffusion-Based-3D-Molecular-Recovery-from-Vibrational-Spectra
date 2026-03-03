@@ -139,6 +139,7 @@
             width: 900px; /* 可调整 */
         }
         
+        
         #bibtex-container {
         max-width: 900px;
         margin: 50px auto;
@@ -172,14 +173,40 @@
         h2 {
             text-align: left;
         }
-
+        
+        /* examples中展示demo的grid布局 */
+        .exp-demo-grid{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1.1fr;
+            gap: 18px;
+            align-items: center;        /* 这里改成 start：两列“顶对齐” */
+        }
+        .viewer {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            margin-top: 0;             /* 去掉这里的 margin-top，避免整体往下挤 */
+        }
+ 
+        .exp-buttons-row {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            justify-content: right;
+        }
+  
+        .ir-img {
+            width: 100%;
+            object-fit: contain;
+            background: #fafafa;
+        }
 
     </style>
 </head>
 <body>
 
     <div class="hero-section">
-        <h1>Latent Diffusion-Based 3D Molecular Recovery<h1>
+        <h1>Latent Diffusion-Based 3D Molecular Recovery</h1>
         <h1>from Vibrational Spectra</h1>
         
         <p class="authors">
@@ -210,19 +237,20 @@
             </a>
         </div>
     </div>
-    <!-- <img id="toc" src="./model_TOC3.jpg"> -->
+    
     <div id = "toc" class="container">
         <img id="toc-image" src="fig/toc.png" alt="Table of Contents">
         <div class="media-row">
-        <video id="toc-video" controls autoplay loop muted>
-            <source src="fig/toc.mov" type="video/mp4">
-        </video>
+            <video id="toc-video" controls autoplay loop muted>
+                <source src="fig/toc.mov" type="video/mp4">
+            </video>
 
-        <img id="toc-image-mol" 
-            src="fig/toc_recovered_mol.png" 
-            alt="Recovered Molecule">
+            <img id="toc-image-mol" 
+                src="fig/toc_recovered_mol.png" 
+                alt="Recovered Molecule">
         </div>
-    </div>   
+    </div>  
+
     <section id="abstract">
         <h2>Abstract</h2>
         <p>
@@ -239,7 +267,7 @@
         
     </section>
 
-    <section id="Contribution", class="content-section">
+    <section id="Contribution" class="content-section">
         <h2>Contributions</h2>
         <ul>
             <li>We introduce a <b>novel task</b> of <u>recovering the distribution of 3D molecular geometries from infrared spectroscopy</u>. This formulation bridges molecular structure generation and spectroscopic analysis, and highlights the intrinsic link between vibrational spectral patterns and 3D molecular geometries.</li>
@@ -252,44 +280,83 @@
         </ul>
     </section>
 
-    <section id="Model", class="content-section">
+    <section id="Model" class="content-section">
         <h2>IR-GeoDiff</h2>
-        <img id="model-image" src="fig/model_no_fg.png" alt="Model">
+        <img id="model-image" src="fig/model_horizontal.png" alt="Model">
     </section>
 
-    <section id="Experiment", class="content-section">
+    
+    <section id="Experiment" class="content-section">
         <h2>Examples</h2>
-        test
+        <div id="exp-buttons-mol1" class="exp-buttons-row">
+            <button onclick="loadExample('viewer-mol1', 'examples/mol_1_1.xyz', 'ir-mol1', 'examples/mol_1_ir1.png')">Sample 1</button>
+            <button onclick="loadExample('viewer-mol1', 'examples/mol_1_2.xyz', 'ir-mol1', 'examples/mol_1_ir2.png')">Sample 2</button>
+            <button onclick="loadExample('viewer-mol1', 'examples/mol_1_3.xyz', 'ir-mol1', 'examples/mol_1_ir3.png')">Sample 3</button>
+            <button onclick="loadExample('viewer-mol1', 'examples/mol_1_4.xyz', 'ir-mol1', 'examples/mol_1_ir4.png')">Sample 4</button>
+        </div>
+        <div id="exp-demo-grid-mol1" class="exp-demo-grid">
+            <div id="viewer-mol1-tgt" class="viewer"></div>
+            <div id="viewer-mol1" class="viewer"></div>
+            <img id="ir-mol1" class="ir-img" src="examples/mol_1_ir1.png">
+        </div>
+
+        <div id="exp-buttons-mol2" class="exp-buttons-row">
+            <button onclick="loadExample('viewer-mol2', 'examples/mol_2_1.xyz', 'ir-mol2', 'examples/mol_2_ir1.png')">Sample 1</button>
+            <button onclick="loadExample('viewer-mol2', 'examples/mol_2_2.xyz', 'ir-mol2', 'examples/mol_2_ir2.png')">Sample 2</button>
+            <button onclick="loadExample('viewer-mol2', 'examples/mol_2_3.xyz', 'ir-mol2', 'examples/mol_2_ir3.png')">Sample 3</button>
+            <button onclick="loadExample('viewer-mol2', 'examples/mol_2_4.xyz', 'ir-mol2', 'examples/mol_2_ir4.png')">Sample 4</button>
+        </div>
+        <div id="exp-demo-grid-mol2" class="exp-demo-grid">
+            <div id="viewer-mol2-tgt" class="viewer"></div>
+            <div id="viewer-mol2" class="viewer"></div>
+            <img id="ir-mol2" class="ir-img" src="examples/mol_2_ir1.png">
+        </div>
         
-    </section>
-
-    <section id="Cross-attention", class="content-section">
-        <h2>Cross-Attention Visualisation</h2>
-        test
-    </section>
-
-    <section id="Exceptions", class="content-section">
-        <h2>Exceptions</h2>
-        test
 
     </section>
     
-    <!-- <div id="bibtex-container">
-    <h2>BibTeX</h2>
-    <div id="bibtex-scroll">
-    <pre>
-@article{wu2025transformer,
- title={Transformer-Based Models for Predicting Molecular Structures from Infrared Spectra Using Patch-Based Self-Attention},
- author={Wu, Wenjin and Leonardis, Aleš and Jiao, Jianbo and Jiang, Jun and Chen, Linjiang},
- journal={The Journal of Physical Chemistry A},
- volume = {129},
- number = {8},
- pages = {2077-2085},
- year={2025},
- doi = {10.1021/acs.jpca.4c05665},
- publisher={ACS Publications}
-}</pre>
-        </div>
-    </div> -->
+    <script src="https://3Dmol.org/build/3Dmol-min.js"></script>
+    <script>
+        const viewers = {};  // 存所有viewer
+
+        
+        initViewer("viewer-mol1-tgt", "examples/mol_1_tgt.xyz");
+        initViewer("viewer-mol1", "examples/mol_1_1.xyz");
+        initViewer("viewer-mol2-tgt", "examples/mol_2_tgt.xyz");
+        initViewer("viewer-mol2", "examples/mol_2_1.xyz");
+
+        function initViewer(divID, defaultMol){
+            const element = document.getElementById(divID);
+            const viewer = $3Dmol.createViewer(element, { backgroundColor: "white" });
+            viewers[divID] = viewer;
+            loadMol(divID, defaultMol);  // 默认加载
+        }
+
+        function loadMol(divID, filename){
+            const viewer = viewers[divID];
+            fetch(filename)
+            .then(r => r.text())
+            .then(data => {
+                viewer.clear();
+                viewer.addModel(data, "xyz");
+                viewer.setStyle({}, {stick:{radius:0.2}, sphere:{radius:0.42}});
+                viewer.setStyle({elem: 'C'}, {
+                    stick: {color: '#808080', radius: 0.2},
+                    sphere: {color: '#808080', radius: 0.42}
+                });
+                viewer.zoomTo();
+                viewer.render();
+            });
+        }
+
+        function loadExample(viewerID, molFile, irID, irFile){
+            loadMol(viewerID, molFile);
+
+            const img = document.getElementById(irID);
+            if(img){
+                img.src = irFile;
+            }
+        }
+    </script>
 </body>
 </html>
