@@ -361,6 +361,26 @@
                 <img id="ir-mol2" class="ir-img" src="examples/mol_2_ir1.png">
             </div>
     </section>
+
+    <section id="Attention-based Analysis" class="content-section">
+        <h2>Attention-based Analysis</h2>
+        <p>
+            We further investigate how the proposed model works.
+            We find that the model is able to focus on spectral regions associated with characteristic functional groups.
+            This behaviour qualitatively resembles how chemists interpret IR spectra.
+        </p>
+
+        <div id="ca-buttons-row" class="exp-buttons-row">
+            <button onclick="loadVibMol('attention-mol', 'attention/mol1_CN.xyz')">Molecule 1</button>
+            <button onclick="loadVibMol('attention-mol', 'attention/mol2_OH.xyz')">Molecule 2</button>
+            <button onclick="loadVibMol('attention-mol', 'attention/mol3_CN.xyz')">Molecule 3a</button>
+            <button onclick="loadVibMol('attention-mol', 'attention/mol3_OH.xyz')">Molecule 3b</button>
+        </div>
+        <div id="attention-vib-mol" class="viewer"></div>
+        
+        
+
+    </section>
     
     <script src="https://3Dmol.org/build/3Dmol-min.js"></script>
     <script>
@@ -372,11 +392,16 @@
         initViewer("viewer-mol2-tgt", "examples/mol_2_tgt.xyz");
         initViewer("viewer-mol2", "examples/mol_2_1.xyz");
 
+        initViewer("attention-vib-mol");
+        loadVibMol("attention-vib-mol", "attention/mol1_CN.xyz");
+
         function initViewer(divID, defaultMol){
             const element = document.getElementById(divID);
             const viewer = $3Dmol.createViewer(element, { backgroundColor: "white" });
             viewers[divID] = viewer;
-            loadMol(divID, defaultMol);  // 默认加载
+            if (defaultMol) {
+                loadMol(divID, defaultMol);  // 默认加载
+            }
         }
 
         function loadMol(divID, filename){
@@ -404,11 +429,31 @@
                 img.src = irFile;
             }
         
-        const similarityText = document.getElementById(similarityID);
-            if (similarityText) {
-                similarityText.innerHTML = `<b>sim<sub>G</sub></b>: ${simg}, <b>SIS</b>: ${sis}, <b>SIS<sup>*</sup></b>: ${sis_star}`;
+            const similarityText = document.getElementById(similarityID);
+                if (similarityText) {
+                    similarityText.innerHTML = `<b>sim<sub>G</sub></b>: ${simg}, <b>SIS</b>: ${sis}, <b>SIS<sup>*</sup></b>: ${sis_star}`;
+                }
             }
+        
+        function loadVibMol(divID, filename){
+            const viewer = viewers[divID];
+            fetch(filename)
+            .then(r => r.text())
+            .then(data => {
+                viewer.clear();
+                viewer.addModelsAsFrames(data, 'xyz');
+                viewer.setStyle({}, {stick:{radius:0.2}, sphere:{radius:0.42}});
+                viewer.setStyle({elem: 'C'}, {
+                    stick: {color: '#808080', radius: 0.2},
+                    sphere: {color: '#808080', radius: 0.42}
+                });
+                viewer.stopAnimate();
+                viewer.animate({loop: 'backAndForth', interval: 70});
+                viewer.zoomTo();
+                viewer.render();
+            });
         }
+        
     </script>
 </body>
 </html>
