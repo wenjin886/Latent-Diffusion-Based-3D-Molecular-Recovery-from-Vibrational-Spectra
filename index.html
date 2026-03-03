@@ -141,14 +141,14 @@
         
         
         #bibtex-container {
-        max-width: 900px;
-        margin: 50px auto;
-        text-align: left;
-        background: #f9f9f9;
-        padding: 20px;
-        border-radius: 10px;
-        font-family: monospace;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            margin: 50px auto;
+            text-align: left;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: monospace;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         #bibtex-scroll {
@@ -177,9 +177,9 @@
         /* examples中展示demo的grid布局 */
         .exp-demo-grid{
             display: grid;
-            grid-template-columns: 1fr 1fr 1.1fr;
-            gap: 18px;
-            align-items: center;        /* 这里改成 start：两列“顶对齐” */
+            grid-template-columns: 1fr 1fr 1.2fr;
+            gap: 10px;
+            align-items: center;   
         }
         .viewer {
             position: relative;
@@ -192,13 +192,48 @@
             display: flex;
             flex-direction: row;
             gap: 10px;
-            justify-content: right;
+            /* justify-content: right; */
+            justify-content: center;
+            margin-bottom: 0;
         }
   
         .ir-img {
-            width: 100%;
+            width: 120%;
             object-fit: contain;
             background: #fafafa;
+        }
+        .exp-block {
+            margin-bottom: 28px;
+        }
+        .exp-head-row {
+            display: grid;
+            grid-template-columns: 1fr 2.1fr;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 8px;
+        }
+        .exp-ref-title {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: capitalize;
+            text-align: center;
+        }
+        .exp-right-head {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 6px;
+        }
+        .exp-similarity {
+            font-size: 15px;
+            color: #444;
+            margin: 0;
         }
 
     </style>
@@ -288,31 +323,43 @@
     
     <section id="Experiment" class="content-section">
         <h2>Examples</h2>
-        <div id="exp-buttons-mol1" class="exp-buttons-row">
-            <button onclick="loadExample('viewer-mol1', 'examples/mol_1_1.xyz', 'ir-mol1', 'examples/mol_1_ir1.png')">Sample 1</button>
-            <button onclick="loadExample('viewer-mol1', 'examples/mol_1_2.xyz', 'ir-mol1', 'examples/mol_1_ir2.png')">Sample 2</button>
-            <button onclick="loadExample('viewer-mol1', 'examples/mol_1_3.xyz', 'ir-mol1', 'examples/mol_1_ir3.png')">Sample 3</button>
-            <button onclick="loadExample('viewer-mol1', 'examples/mol_1_4.xyz', 'ir-mol1', 'examples/mol_1_ir4.png')">Sample 4</button>
+        <div class="exp-block">
+            <div class="exp-head-row">
+                <div class="exp-ref-title">Reference Molecule</div>
+                <div class="exp-right-head">
+                    <div id="exp-buttons-mol1" class="exp-buttons-row">
+                        <button onclick="loadExample('viewer-mol1', 'examples/mol_1_1.xyz', 'ir-mol1', 'examples/mol_1_ir1.png', 'sim-mol1', '1.00', '0.974', '0.969')">Sample 1</button>
+                        <button onclick="loadExample('viewer-mol1', 'examples/mol_1_2.xyz', 'ir-mol1', 'examples/mol_1_ir2.png', 'sim-mol1', '0.812', '0.850', '0.889')">Sample 2</button>
+                        <button onclick="loadExample('viewer-mol1', 'examples/mol_1_3.xyz', 'ir-mol1', 'examples/mol_1_ir3.png', 'sim-mol1', '0.647', '0.840', '0.889')">Sample 3</button>
+                        <button onclick="loadExample('viewer-mol1', 'examples/mol_1_4.xyz', 'ir-mol1', 'examples/mol_1_ir4.png', 'sim-mol1', '0.611', '0.822', '0.851')">Sample 4</button>
+                    </div>
+                    <div id="sim-mol1" class="exp-similarity"><b>sim<sub>G</sub></b>: 1.00, <b>SIS</b>: 0.974, <b>SIS<sup>*</sup></b>: 0.969</div>
+                </div>
+            </div>
+            <div id="exp-demo-grid-mol1" class="exp-demo-grid">
+                <div id="viewer-mol1-tgt" class="viewer"></div>
+                <div id="viewer-mol1" class="viewer"></div>
+                <img id="ir-mol1" class="ir-img" src="examples/mol_1_ir1.png">
+            </div>
         </div>
-        <div id="exp-demo-grid-mol1" class="exp-demo-grid">
-            <div id="viewer-mol1-tgt" class="viewer"></div>
-            <div id="viewer-mol1" class="viewer"></div>
-            <img id="ir-mol1" class="ir-img" src="examples/mol_1_ir1.png">
-        </div>
-
-        <div id="exp-buttons-mol2" class="exp-buttons-row">
-            <button onclick="loadExample('viewer-mol2', 'examples/mol_2_1.xyz', 'ir-mol2', 'examples/mol_2_ir1.png')">Sample 1</button>
-            <button onclick="loadExample('viewer-mol2', 'examples/mol_2_2.xyz', 'ir-mol2', 'examples/mol_2_ir2.png')">Sample 2</button>
-            <button onclick="loadExample('viewer-mol2', 'examples/mol_2_3.xyz', 'ir-mol2', 'examples/mol_2_ir3.png')">Sample 3</button>
-            <button onclick="loadExample('viewer-mol2', 'examples/mol_2_4.xyz', 'ir-mol2', 'examples/mol_2_ir4.png')">Sample 4</button>
-        </div>
-        <div id="exp-demo-grid-mol2" class="exp-demo-grid">
-            <div id="viewer-mol2-tgt" class="viewer"></div>
-            <div id="viewer-mol2" class="viewer"></div>
-            <img id="ir-mol2" class="ir-img" src="examples/mol_2_ir1.png">
-        </div>
-        
-
+        <div class="exp-block">
+            <div class="exp-head-row">
+                <div class="exp-ref-title">Reference Molecule</div>
+                <div class="exp-right-head">
+                    <div id="exp-buttons-mol2" class="exp-buttons-row">
+                        <button onclick="loadExample('viewer-mol2', 'examples/mol_2_1.xyz', 'ir-mol2', 'examples/mol_2_ir1.png', 'sim-mol2', '1.00', '0.985', '0.984')">Sample 1</button>
+                        <button onclick="loadExample('viewer-mol2', 'examples/mol_2_2.xyz', 'ir-mol2', 'examples/mol_2_ir2.png', 'sim-mol2', '0.800', '0.830', '0.845')">Sample 2</button>
+                        <button onclick="loadExample('viewer-mol2', 'examples/mol_2_3.xyz', 'ir-mol2', 'examples/mol_2_ir3.png', 'sim-mol2', '0.687', '0.0.693', '0.0.754')">Sample 3</button>
+                        <button onclick="loadExample('viewer-mol2', 'examples/mol_2_4.xyz', 'ir-mol2', 'examples/mol_2_ir4.png', 'sim-mol2', '0.647', '0.682', '0.801')">Sample 4</button>
+                    </div>
+                    <div id="sim-mol2" class="exp-similarity"><b>sim<sub>G</sub></b>: 1.00, <b>SIS</b>: 0.985, <b>SIS<sup>*</sup></b>: 0.984</div>
+                </div>
+            </div>
+            <div id="exp-demo-grid-mol2" class="exp-demo-grid">
+                <div id="viewer-mol2-tgt" class="viewer"></div>
+                <div id="viewer-mol2" class="viewer"></div>
+                <img id="ir-mol2" class="ir-img" src="examples/mol_2_ir1.png">
+            </div>
     </section>
     
     <script src="https://3Dmol.org/build/3Dmol-min.js"></script>
@@ -349,12 +396,17 @@
             });
         }
 
-        function loadExample(viewerID, molFile, irID, irFile){
+        function loadExample(viewerID, molFile, irID, irFile, similarityID, simg, sis, sis_star){
             loadMol(viewerID, molFile);
 
             const img = document.getElementById(irID);
             if(img){
                 img.src = irFile;
+            }
+        
+        const similarityText = document.getElementById(similarityID);
+            if (similarityText) {
+                similarityText.innerHTML = `<b>sim<sub>G</sub></b>: ${simg}, <b>SIS</b>: ${sis}, <b>SIS<sup>*</sup></b>: ${sis_star}`;
             }
         }
     </script>
