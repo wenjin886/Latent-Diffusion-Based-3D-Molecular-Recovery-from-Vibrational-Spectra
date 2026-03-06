@@ -374,9 +374,9 @@
         <p> The goal for IR-GeoDiff is to recover molecular structures consistent with a given IR spectrum instead of encouraging diversity. 
             Here, we evaluate the recovery performance of IR-GeoDiff from both structural and spectral perspectives.</p>
         <ul>
-            <li>Structural Similarity: We measure chemical graphsimilarity (sim<sub>G</sub>) between the recovered and reference molecular structures, defined as the Tanimoto similarity between Morgan fingerprints computed
+            <li>Structural Similarity: We measure chemical graphsimilarity (sim<sub>g</sub>) between the recovered and reference molecular structures, defined as the Tanimoto similarity between Morgan fingerprints computed
                 using RDKit.</li>
-            <li>Spectral Simlarity: We adopt the Spectral Information Similarity (SIS) metric  proposed by <a href="https://pubs.acs.org/doi/10.1021/acs.jcim.1c00055">McGill et al.</a>, which quantifies the similarity between
+            <li>Spectral Similarity: We adopt the Spectral Information Similarity (SIS) metric  proposed by <a href="https://pubs.acs.org/doi/10.1021/acs.jcim.1c00055">McGill et al.</a>, which quantifies the similarity between
                 the input spectrum and the spectrum of the recovered molecule. We further define SIS<sup>*</sup>, which computes the SIS score restricted to the functional group region (1,350 - 4,000 cm<sup>-1</sup>).</li>
         </ul>
     
@@ -391,7 +391,7 @@
                         <button class="btn" onclick="loadExample('viewer-mol1', 'materials/examples/mol_1_3.xyz', 'ir-mol1', 'materials/examples/mol_1_ir3.png', 'sim-mol1', '0.647', '0.840', '0.889')" >Sample 3</button>
                         <button class="btn" onclick="loadExample('viewer-mol1', 'materials/examples/mol_1_4.xyz', 'ir-mol1', 'materials/examples/mol_1_ir4.png', 'sim-mol1', '0.611', '0.822', '0.851')" >Sample 4</button>
                     </div>
-                    <div id="sim-mol1" class="exp-similarity"><b>sim<sub>G</sub></b>: 1.00, <b>SIS</b>: 0.974, <b>SIS<sup>*</sup></b>: 0.969</div>
+                    <div id="sim-mol1" class="exp-similarity"><b>sim<sub>g</sub></b>: 1.00, <b>SIS</b>: 0.974, <b>SIS<sup>*</sup></b>: 0.969</div>
                 </div>
             </div>
             <div id="exp-demo-grid-mol1" class="exp-demo-grid">
@@ -410,7 +410,7 @@
                         <button class="btn" onclick="loadExample('viewer-mol2', 'materials/examples/mol_2_3.xyz', 'ir-mol2', 'materials/examples/mol_2_ir3.png', 'sim-mol2', '0.687', '0.693', '0.754')">Sample 3</button>
                         <button class="btn" onclick="loadExample('viewer-mol2', 'materials/examples/mol_2_4.xyz', 'ir-mol2', 'materials/examples/mol_2_ir4.png', 'sim-mol2', '0.647', '0.682', '0.801')">Sample 4</button>
                     </div>
-                    <div id="sim-mol2" class="exp-similarity"><b>sim<sub>G</sub></b>: 1.00, <b>SIS</b>: 0.985, <b>SIS<sup>*</sup></b>: 0.984</div>
+                    <div id="sim-mol2" class="exp-similarity"><b>sim<sub>g</sub></b>: 1.00, <b>SIS</b>: 0.985, <b>SIS<sup>*</sup></b>: 0.984</div>
                 </div>
             </div>
             <div id="exp-demo-grid-mol2" class="exp-demo-grid">
@@ -455,7 +455,7 @@
     <section id="limittaions" class="content-section">
         <h2>Analysis on Exceptions</h2>
         <p>
-            Figure <b>A</b> here presents the joint distribution of graph similarity sim<sub>G</sub> and SIS across 1,000 test spectra, with 50 sampled molecules per spectrum.
+            Figure <b>A</b> here presents the joint distribution of graph similarity sim<sub>g</sub> and SIS across 1,000 test spectra, with 50 sampled molecules per spectrum.
             A sharp density peak appears near the top-right corner, indicating a cluster of molecules that are near-exact matches to the reference.
         </p>
 
@@ -475,7 +475,7 @@
             <div class="exception-head-row">
                 <div class="exp-ref-title">Reference Molecule</div>
                 <div class="exp-ref-title">Recovered Molecule</div>
-                <div id="sim-hbond" class="exception-similarity"><b>sim<sub>G</sub></b>: 1.00, <b>SIS</b>: 0.378, <b>SIS<sup>*</sup></b>: 0.268</div>
+                <div id="sim-hbond" class="exception-similarity"><b>sim<sub>g</sub></b>: 1.00, <b>SIS</b>: 0.378, <b>SIS<sup>*</sup></b>: 0.268</div>
             </div>
             <div class="exp-demo-grid">
                 <div id="viewer-hbond-tgt" class="viewer"></div>
@@ -484,7 +484,7 @@
             </div>
         </div>
         <p>
-            Samples with high sim<sub>G</sub> but low SIS, primarily caused by conformational changes, especially some of which result in the formation of intramolecular hydrogen bonds. 
+            Samples with high sim<sub>g</sub> but low SIS, primarily caused by conformational changes, especially some of which result in the formation of intramolecular hydrogen bonds. 
             These interactions can shift the vibrational frequencies of associated functional groups, leading to notable discrepancies in the IR spectra despite high structural similarity. 
         </p>
         <h3>High SIS similarity but low graph similarity</h3>
@@ -496,7 +496,7 @@
             <div class="exception-head-row">
                 <div class="exp-ref-title">Reference Molecule</div>
                 <div class="exp-ref-title">Recovered Molecule</div>
-                <div id="sim-scaffold" class="exception-similarity"><b>sim<sub>G</sub></b>: 0.167, <b>SIS</b>: 0.896, <b>SIS<sup>*</sup></b>: 0.970</div>
+                <div id="sim-scaffold" class="exception-similarity"><b>sim<sub>g</sub></b>: 0.167, <b>SIS</b>: 0.896, <b>SIS<sup>*</sup></b>: 0.970</div>
             </div>
             <div class="exp-demo-grid">
                 <div id="viewer-scaffold-tgt" class="viewer"></div>
@@ -505,7 +505,7 @@
             </div>
         </div>
         <p>
-            Samples with low sim<sub>G</sub> but high SIS typically arises from mismatches in the molecular scaffolds, 
+            Samples with low sim<sub>g</sub> but high SIS typically arises from mismatches in the molecular scaffolds, 
             particularly when molecules lack distinctive functional groups and consist of carbon and hydrogen atoms. 
             In such cases, the IR spectral signals reflecting differences in carbon backbone topology are often subtle and difficult to interpret, 
             highlighting the limited ability of IR spectroscopy to resolve differences in molecular skeletons. 
@@ -571,7 +571,7 @@
         
             const similarityText = document.getElementById(similarityID);
                 if (similarityText) {
-                    similarityText.innerHTML = `<b>sim<sub>G</sub></b>: ${simg}, <b>SIS</b>: ${sis}, <b>SIS<sup>*</sup></b>: ${sis_star}`;
+                    similarityText.innerHTML = `<b>sim<sub>g</sub></b>: ${simg}, <b>SIS</b>: ${sis}, <b>SIS<sup>*</sup></b>: ${sis_star}`;
                 }
             }
         
@@ -610,7 +610,7 @@
         
             const similarityText = document.getElementById(similarityID);
                 if (similarityText) {
-                    similarityText.innerHTML = `<b>sim<sub>G</sub></b>: ${simg}, <b>SIS</b>: ${sis}, <b>SIS<sup>*</sup></b>: ${sis_star}`;
+                    similarityText.innerHTML = `<b>sim<sub>g</sub></b>: ${simg}, <b>SIS</b>: ${sis}, <b>SIS<sup>*</sup></b>: ${sis_star}`;
                 }
         }
     </script>
